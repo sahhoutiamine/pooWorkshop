@@ -34,8 +34,8 @@ add_book($books, 'Design Patterns', 'Gang of Four', 49.99, 2);
 display_books($books);
 Tâches pour les apprenants :
 
-Phase 1  : Créer les entités Book et Author
-
+(Phase 1  : Créer les entités Book et Author
+)Done
 Phase 2  : Implémenter BookRepository avec Singleton PDO
 
 Phase 3  : Ajouter un Service Layer (LibraryService)
