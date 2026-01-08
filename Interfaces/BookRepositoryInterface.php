@@ -7,5 +7,5 @@ interface BookRepositoryInterface {
     public function addBook($book) : void;
     public function getAuthorId($title) : ?Book;
     public function getAuthorId ($bookId) : int;
-    public function getAuthorTitle ($bookId) :string;
+    public function getAuthorName ($bookId) :string;
 }`
