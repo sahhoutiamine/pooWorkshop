@@ -7,4 +7,4 @@ interface BookRepositoryInterface {
     public function addBook($book) : void;
     public function getBookByTitle($title) : ?Book;
     public function getAuthorId ($bookId) : int;
-}
+}`

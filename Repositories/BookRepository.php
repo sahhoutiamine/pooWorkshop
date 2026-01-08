@@ -33,4 +33,9 @@ class BookRepository implements BookRepositoryInterface {
         return $stmt->execute([$bookId]);
     }
 
+    public function getBookByTitle ($title) {
+        $stmt = $this->db->prepare("SELECT * FROM books WHERE title = ?");
+        return $stmt->execute([$title]);
+    }
+
 }
