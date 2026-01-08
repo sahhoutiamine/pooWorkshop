@@ -15,6 +15,14 @@ class LibraryService {
         }
 
     }
+    public function desplayBookByTitle ($title) {
+        $book = BookRepository::getBookByTitle($title);
+        echo `${$book->title} by ${$authorName}, price : ${$book->price}, stock : ${$book->stock}`;
+    }
+    public function addBook ($book) {
+        BookRepository::addBook($book);
+    }
+
 
 
 
