@@ -38,4 +38,10 @@ class BookRepository implements BookRepositoryInterface {
         $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
         return $stmt->execute([$bookId]);
     }
+
+        public function getAuthorTitle ($bookId) {
+            $stmt = $this->db->prepare("SELECT a.name FROM author a INNER JOIN books b ON a.id = b.authorId and b.id = ?");
+            return $stmt->execute([$bookId]);
+        };
+
 }
