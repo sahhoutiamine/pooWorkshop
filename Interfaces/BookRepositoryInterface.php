@@ -6,4 +6,5 @@ interface BookRepositoryInterface {
     public function getAllBooks() : array;
     public function addBook($book) : void;
     public function getBookByTitle($title) : ?Book;
+    public function getAuthorId ($bookId) : int;
 }

@@ -4,14 +4,14 @@
 class Book {
     private $id;
     private $title;
-    private $author;
+    private $authorId;
     private $price;
     private $stock;
 
-    public function __construct ($id, $title, $author, $price, $stock) {
+    public function __construct ($id, $title, $authorId, $price, $stock) {
         $this->id = $id;
         $this->title = $title;
-        $this->author = $author;
+        $this->authorId = $authorId;
         $this->price = $price;
         $this->stock = $stock;
 
@@ -23,8 +23,8 @@ class Book {
     public function getTitle() {
         return $this->title;
     }
-    public function getAuthor() {
-        return $this->author;
+    public function getauthorId() {
+        return $this->authorId;
     }
     public function getPrice() {
         return $this->price;

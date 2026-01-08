@@ -18,8 +18,19 @@ class BookRepository implements BookRepositoryInterface {
     }
 
     public function addBook ($book) {
-        $stmt = $this->db->prepare("INSERT INTO books (id, title, authorId, price, stock) VALUES (?, ?, ?, ?, ?) ;");
-        $stmt->execute([$book->id, $book->title, $book->author->id, $book->price, $book->stock]);
+        |$authorId = getAuthorId($book->id);
+        $stmt = $this->db->prepare("INSERT INTO books (title, authorId, price, stock) VALUES (?, ?, ?, ?, ?) ;");
+        $stmt->execute([$book->title, $authorId, $book->price, $book->stock]);
+    }
+
+    // public function getAuthorId ($book) {
+    //     $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
+    //     $stmt->execute([$book->id]);
+    // }
+
+    public function getAuthorId ($bookId) {
+        $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
+        return $stmt->execute([$bookId]);
     }
 
 }
