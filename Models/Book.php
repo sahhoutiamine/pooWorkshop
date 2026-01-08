@@ -17,6 +17,22 @@ class Book {
 
     }
 
+    public function getId() {
+        return $this->id;
+    }
+    public function getTitle() {
+        return $this->title;
+    }
+    public function getAuthor() {
+        return $this->author;
+    }
+    public function getPrice() {
+        return $this->price;
+    }
+    public function getStock() {
+        return $this->stock;
+    }
+
     public function displayBooks($) {
     return "{$this->title} by {$this->author} - {$this->price}€ (Stock: {$this->stock})";
     }
