@@ -36,8 +36,8 @@ Tâches pour les apprenants :
 
 (Phase 1  : Créer les entités Book et Author
 )Done
-Phase 2  : Implémenter BookRepository avec Singleton PDO
-
+(Phase 2  : Implémenter BookRepository avec Singleton PDO
+)Done
 Phase 3  : Ajouter un Service Layer (LibraryService)
 
 Phase 4  : Ajouter validation, exceptions, tests unitaires basiques

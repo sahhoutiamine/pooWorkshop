@@ -28,14 +28,14 @@ class BookRepository implements BookRepositoryInterface {
     //     $stmt->execute([$book->id]);
     // }
 
-    public function getAuthorId ($bookId) {
-        $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
-        return $stmt->execute([$bookId]);
-    }
-
+    
     public function getBookByTitle ($title) {
         $stmt = $this->db->prepare("SELECT * FROM books WHERE title = ?");
         return $stmt->execute([$title]);
     }
-
+    
+    public function getAuthorId ($bookId) {
+        $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
+        return $stmt->execute([$bookId]);
+    }
 }
