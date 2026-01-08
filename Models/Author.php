@@ -14,4 +14,9 @@ class Author {
         $this->books = $books;
     }
 
+
+    public function getId() {
+        return $this->id;
+    }
+
 }
