@@ -21,5 +21,8 @@ class Author {
     public function getName() {
         return $this->name;
     }
+    public function getBooks() {
+        return $this->books;
+    }
 
 }
