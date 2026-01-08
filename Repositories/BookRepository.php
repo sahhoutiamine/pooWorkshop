@@ -17,6 +17,9 @@ class BookRepository implements BookRepositoryInterface {
         return $books->fetchAll();
     }
 
-   
+    public function addBook ($book) {
+        $stmt = $this->db->prepare("INSERT INTO books (id, title, authorId, price, stock) VALUES (?, ?, ?, ?, ?) ;");
+        $stmt->execute([$book->id, $book->title, $book->author->id, $book->price, $book->stock]);
+    }
 
 }
