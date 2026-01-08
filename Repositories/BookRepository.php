@@ -12,15 +12,19 @@ class BookRepository implements BookRepositoryInterface {
         $this->db = Database::getInstance()->getConnection();
     }
 
-    public function getAllBooks () {
-        $books = $this->db->query("SELECT * FROM books ;");
-        return $books->fetchAll();
+    public function getAllBooks() : array {
+        $stmt = $this->db->query("SELECT * FROM books");
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $books = [];
+        foreach ($results as $row) {
+            $books[] = new Book($row['id'], $row['title'], $row['authorId'], $row['price'], $row['stock']);
+        }
+        return $books;
     }
 
-    public function addBook ($book) {
-        |$authorId = getAuthorId($book->id);
-        $stmt = $this->db->prepare("INSERT INTO books (title, authorId, price, stock) VALUES (?, ?, ?, ?, ?) ;");
-        $stmt->execute([$book->title, $authorId, $book->price, $book->stock]);
+    public function addBook($book) : void {
+        $stmt = $this->db->prepare("INSERT INTO books (title, authorId, price, stock) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$book->getTitle(), $book->getauthorId(), $book->getPrice(), $book->getStock()]);
     }
 
     // public function getAuthorId ($book) {
@@ -29,19 +33,28 @@ class BookRepository implements BookRepositoryInterface {
     // }
 
     
-    public function getBookByTitle ($title) {
+    public function getBookByTitle($title) : ?Book {
         $stmt = $this->db->prepare("SELECT * FROM books WHERE title = ?");
-        return $stmt->execute([$title]);
+        $stmt->execute([$title]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Book($row['id'], $row['title'], $row['authorId'], $row['price'], $row['stock']);
+        }
+        return null;
     }
     
-    public function getAuthorId ($bookId) {
+    public function getAuthorId($bookId) : int {
         $stmt = $this->db->prepare("SELECT authorId FROM books WHERE id = ?");
-        return $stmt->execute([$bookId]);
+        $stmt->execute([$bookId]);
+        $result = $stmt->fetchColumn();
+        return $result ? (int)$result : 0;
     }
 
-        public function getAuthorName ($bookId) {
-            $stmt = $this->db->prepare("SELECT a.name FROM author a INNER JOIN books b ON a.id = b.authorId and b.id = ?");
-            return $stmt->execute([$bookId]);
-        };
+    public function getAuthorName($bookId) : string {
+        $stmt = $this->db->prepare("SELECT a.name FROM author a INNER JOIN books b ON a.id = b.authorId WHERE b.id = ?");
+        $stmt->execute([$bookId]);
+        $result = $stmt->fetchColumn();
+        return $result ? (string)$result : "Unknown";
+    }
 
 }

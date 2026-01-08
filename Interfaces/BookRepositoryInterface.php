@@ -8,4 +8,4 @@ interface BookRepositoryInterface {
     public function getBookByTitle($title) : ?Book;
     public function getAuthorId ($bookId) : int;
     public function getAuthorName ($bookId) :string;
-}`
+}

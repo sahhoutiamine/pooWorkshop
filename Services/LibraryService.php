@@ -5,25 +5,31 @@ require_once "../Models/Author.php";
 require_once "../Repositories/BookRepository.php";
 
 class LibraryService {
-    $books = [];
+    private $bookRepository;
 
-    public function desplayAllBooks () {
-        $books = BookRepository::getAllBooks();
+    public function __construct() {
+        $this->bookRepository = new BookRepository();
+    }
+
+    public function displayAllBooks() {
+        $books = $this->bookRepository->getAllBooks();
         foreach ($books as $book) {
-            $authorName = BookRepository::getAuthorName($book->id);
-            echo `${$book->title} by ${$authorName}, price : ${$book->price}, stock : ${$book->stock}`;
+            $authorName = $this->bookRepository->getAuthorName($book->getId());
+            echo "{$book->getTitle()} by {$authorName}, price : {$book->getPrice()}, stock : {$book->getStock()}\n";
         }
-
-    }
-    public function desplayBookByTitle ($title) {
-        $book = BookRepository::getBookByTitle($title);
-        echo `${$book->title} by ${$authorName}, price : ${$book->price}, stock : ${$book->stock}`;
-    }
-    public function addBook ($book) {
-        BookRepository::addBook($book);
     }
 
+    public function displayBookByTitle($title) {
+        $book = $this->bookRepository->getBookByTitle($title);
+        if ($book) {
+            $authorName = $this->bookRepository->getAuthorName($book->getId());
+            echo "{$book->getTitle()} by {$authorName}, price : {$book->getPrice()}, stock : {$book->getStock()}\n";
+        } else {
+            echo "Book not found.\n";
+        }
+    }
 
-
-
+    public function addBook($book) {
+        $this->bookRepository->addBook($book);
+    }
 }
