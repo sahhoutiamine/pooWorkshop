@@ -17,5 +17,8 @@ class Book {
 
     }
 
+    public function displayBooks($) {
+    return "{$this->title} by {$this->author} - {$this->price}€ (Stock: {$this->stock})";
+    }
 
 }
